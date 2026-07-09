@@ -3,1221 +3,545 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhishek's 15-Month Roadmap</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<title>faang.tracker — abhishek</title>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --border: #1e1e2e;
-    --accent1: #00ff88;
-    --accent2: #ff6b35;
-    --accent3: #4fc3f7;
-    --accent4: #ffd166;
-    --accent5: #c77dff;
-    --text: #e8e8f0;
-    --muted: #666680;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; min-height: 100vh; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 1; }
+:root{
+  --bg:#0a0e12;
+  --bg2:#0f151b;
+  --card:#121a22;
+  --line:#1e2a35;
+  --text:#d7e1ea;
+  --dim:#6b7f8f;
+  --faint:#3d4f5d;
+  --green:#2cbb5d;
+  --amber:#ffb300;
+  --red:#e5534b;
+  --mono:ui-monospace,'JetBrains Mono','Fira Code','Cascadia Code',Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;padding-bottom:80px}
+::selection{background:#2cbb5d33}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+.comment{color:var(--faint);font-size:12px;letter-spacing:.04em}
+h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--dim);margin-bottom:18px}
+section{margin-top:56px}
 
-  /* HEADER */
-  .header { margin-bottom: 40px; animation: fadeUp 0.6s ease both; }
-  .header-tag { font-size: 11px; letter-spacing: 4px; color: var(--accent1); text-transform: uppercase; margin-bottom: 12px; opacity: 0.8; }
-  .header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 10vw, 88px); line-height: 0.9; letter-spacing: 2px; }
-  .header h1 span { color: var(--accent1); }
-  .header-sub { margin-top: 14px; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-  .header-meta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-  .meta-pill { padding: 5px 12px; border: 1px solid var(--border); font-size: 10px; letter-spacing: 1px; color: var(--muted); }
-  .meta-pill span { color: var(--accent1); }
+header{padding:44px 0 0}
+.head-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.title h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.title h1 span{color:var(--green)}
+.title .sub{color:var(--dim);margin-top:8px;font-size:13px}
+.title .sub b{color:var(--text);font-weight:600}
+.ring-box{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 20px}
+.ring{position:relative;width:88px;height:88px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num b{font-size:24px;line-height:1}
+.ring .num i{font-style:normal;font-size:9px;color:var(--dim);letter-spacing:.1em}
+.ring-label{font-size:11px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+.ring-label b{display:block;color:var(--text);font-size:13px;margin-top:4px;letter-spacing:0;text-transform:none}
 
-  /* NAV TABS */
-  .nav-tabs { display: flex; gap: 2px; margin-bottom: 40px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s 0.05s ease both; }
-  .nav-tab { padding: 10px 20px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'JetBrains Mono', monospace; }
-  .nav-tab:hover { color: var(--text); }
-  .nav-tab.active { color: var(--accent1); border-bottom-color: var(--accent1); }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:32px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;position:relative;overflow:hidden}
+.stat b{font-size:26px;font-weight:800;letter-spacing:-.02em;display:block}
+.stat span{font-size:11px;color:var(--dim);letter-spacing:.06em}
+.stat .accent{position:absolute;top:0;left:0;right:0;height:2px}
+.stat.hot b{color:var(--green)}
+.stat small{display:block;font-size:10px;color:var(--faint);margin-top:2px}
 
-  /* NON-NEGS */
-  .non-neg { background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, transparent 60%); border: 1px solid rgba(0,255,136,0.2); border-left: 3px solid var(--accent1); padding: 20px 24px; margin-bottom: 36px; animation: fadeUp 0.5s 0.1s ease both; }
-  .non-neg-title { font-size: 10px; letter-spacing: 3px; color: var(--accent1); text-transform: uppercase; margin-bottom: 12px; }
-  .non-neg-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
-  .non-neg-item { display: flex; align-items: center; gap: 10px; font-size: 11px; }
-  .non-neg-item::before { content: '▸'; color: var(--accent1); font-size: 10px; flex-shrink: 0; }
+.heat-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.heat-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.yr{display:flex;gap:6px}
+.yr button{background:var(--bg2);border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:12px;padding:5px 14px;border-radius:8px;cursor:pointer}
+.yr button.on{color:var(--bg);background:var(--green);border-color:var(--green);font-weight:700}
+.heat-scroll{overflow-x:auto;padding-bottom:6px}
+.heat-scroll::-webkit-scrollbar{height:6px}
+.heat-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.months{display:flex;font-size:10px;color:var(--dim);margin-left:30px;margin-bottom:4px}
+.months span{flex:none}
+.heat-grid{display:flex}
+.dow{display:flex;flex-direction:column;gap:3px;font-size:9px;color:var(--faint);margin-right:6px;width:24px;flex:none}
+.dow span{height:12px;line-height:12px}
+.weeks{display:flex;gap:3px}
+.week{display:flex;flex-direction:column;gap:3px}
+.cell{width:12px;height:12px;border-radius:3px;background:#151e27;cursor:pointer;flex:none;border:1px solid transparent}
+.cell:hover{border-color:var(--dim)}
+.cell.today{outline:1.5px solid var(--green);outline-offset:1px}
+.cell.future{opacity:.35;cursor:default}
+.cell.empty{visibility:hidden}
+.heat-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:10px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:10px;color:var(--dim)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.log-btn{background:var(--green);color:#06210f;border:none;font-family:var(--mono);font-weight:700;font-size:13px;padding:10px 18px;border-radius:10px;cursor:pointer}
+.log-btn:hover{filter:brightness(1.1)}
 
-  /* TIMELINE */
-  .timeline { margin-bottom: 40px; animation: fadeUp 0.5s 0.15s ease both; }
-  .timeline-label { font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-  .timeline-bar { display: grid; grid-template-columns: 4fr 2fr 1fr 5fr 4fr; height: 26px; gap: 2px; }
-  .tl-seg { display: flex; align-items: center; justify-content: center; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-  .tl-seg:nth-child(1) { background: rgba(0,255,136,0.15); color: var(--accent1); }
-  .tl-seg:nth-child(2) { background: rgba(255,107,53,0.15); color: var(--accent2); }
-  .tl-seg:nth-child(3) { background: rgba(79,195,247,0.15); color: var(--accent3); }
-  .tl-seg:nth-child(4) { background: rgba(255,209,102,0.15); color: var(--accent4); }
-  .tl-seg:nth-child(5) { background: rgba(199,125,255,0.15); color: var(--accent5); }
-  .timeline-months { display: grid; grid-template-columns: repeat(15, 1fr); margin-top: 6px; }
-  .tl-month { font-size: 8px; color: var(--muted); text-align: center; }
+.bars{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px 28px}
+.bar-row{padding:6px 0}
+.bar-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
+.bar-top .nm{color:var(--text)}
+.bar-top .ct{color:var(--dim)}
+.bar-top .ct b{color:var(--text)}
+.track{height:8px;background:#151e27;border-radius:4px;overflow:hidden}
+.fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.done-tag{color:var(--green);font-size:10px;margin-left:6px}
 
-  /* PHASES */
-  .phases { display: flex; flex-direction: column; gap: 2px; }
-  .phase { border: 1px solid var(--border); background: var(--surface); overflow: hidden; animation: fadeUp 0.5s ease both; }
-  .phase:nth-child(1){animation-delay:0.2s} .phase:nth-child(2){animation-delay:0.28s} .phase:nth-child(3){animation-delay:0.36s} .phase:nth-child(4){animation-delay:0.44s} .phase:nth-child(5){animation-delay:0.52s}
-  .phase-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; padding: 16px 22px; cursor: pointer; border-left: 3px solid transparent; transition: background 0.2s; }
-  .phase-header:hover { background: rgba(255,255,255,0.02); }
-  .phase[data-color="green"] .phase-header { border-left-color: var(--accent1); }
-  .phase[data-color="orange"] .phase-header { border-left-color: var(--accent2); }
-  .phase[data-color="blue"] .phase-header { border-left-color: var(--accent3); }
-  .phase[data-color="yellow"] .phase-header { border-left-color: var(--accent4); }
-  .phase[data-color="purple"] .phase-header { border-left-color: var(--accent5); }
-  .phase-num { font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1; }
-  .phase[data-color="green"] .phase-num { color: var(--accent1); opacity: 0.3; }
-  .phase[data-color="orange"] .phase-num { color: var(--accent2); opacity: 0.3; }
-  .phase[data-color="blue"] .phase-num { color: var(--accent3); opacity: 0.3; }
-  .phase[data-color="yellow"] .phase-num { color: var(--accent4); opacity: 0.3; }
-  .phase[data-color="purple"] .phase-num { color: var(--accent5); opacity: 0.3; }
-  .phase-period { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
-  .phase[data-color="green"] .phase-period { color: var(--accent1); }
-  .phase[data-color="orange"] .phase-period { color: var(--accent2); }
-  .phase[data-color="blue"] .phase-period { color: var(--accent3); }
-  .phase[data-color="yellow"] .phase-period { color: var(--accent4); }
-  .phase[data-color="purple"] .phase-period { color: var(--accent5); }
-  .phase-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: var(--text); }
-  .phase-toggle { font-size: 18px; color: var(--muted); transition: transform 0.3s; user-select: none; }
-  .phase.open .phase-toggle { transform: rotate(45deg); }
-  .phase-body { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
-  .phase.open .phase-body { max-height: 3000px; }
-  .phase-content { padding: 0 22px 26px; border-top: 1px solid var(--border); }
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.qcard .big{font-size:30px;font-weight:800}
+.qcard .big em{font-style:normal;font-size:13px;color:var(--faint);font-weight:400}
+.qcard .lbl{font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.qcard .goal{font-size:11px;color:var(--faint);margin-top:6px}
+.qcard .goal b{color:var(--amber)}
 
-  /* INNER TABS */
-  .inner-tabs { display: flex; margin: 18px 0 14px; border-bottom: 1px solid var(--border); }
-  .inner-tab { padding: 7px 14px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'JetBrains Mono', monospace; }
-  .inner-tab:hover { color: var(--text); }
-  .phase[data-color="green"] .inner-tab.active { color: var(--accent1); border-bottom-color: var(--accent1); }
-  .phase[data-color="orange"] .inner-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
-  .phase[data-color="blue"] .inner-tab.active { color: var(--accent3); border-bottom-color: var(--accent3); }
-  .phase[data-color="yellow"] .inner-tab.active { color: var(--accent4); border-bottom-color: var(--accent4); }
-  .phase[data-color="purple"] .inner-tab.active { color: var(--accent5); border-bottom-color: var(--accent5); }
-  .inner-content { display: none; }
-  .inner-content.active { display: block; }
+.cbars .bar-top .nm{text-transform:none}
 
-  /* TRACKS */
-  .tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 12px; }
-  .track { padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
-  .track-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-  .track-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .track-items { display: flex; flex-direction: column; gap: 5px; }
-  .track-item { font-size: 11px; color: var(--text); line-height: 1.5; padding-left: 12px; position: relative; }
-  .track-item::before { content: '—'; position: absolute; left: 0; font-size: 9px; top: 2px; }
+.io{display:flex;gap:10px;flex-wrap:wrap}
+.io button,.io label{background:var(--bg2);border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:12px;padding:8px 16px;border-radius:8px;cursor:pointer}
+.io button:hover,.io label:hover{color:var(--text);border-color:var(--dim)}
+.io .danger:hover{color:var(--red);border-color:var(--red)}
+.io input{display:none}
+.saved{font-size:11px;color:var(--faint);margin-top:10px}
 
-  /* TARGETS */
-  .targets { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-  .target { padding: 4px 10px; font-size: 10px; letter-spacing: 1px; }
-  .phase[data-color="green"] .target { background: rgba(0,255,136,0.08); color: var(--accent1); border: 1px solid rgba(0,255,136,0.2); }
-  .phase[data-color="orange"] .target { background: rgba(255,107,53,0.08); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
-  .phase[data-color="blue"] .target { background: rgba(79,195,247,0.08); color: var(--accent3); border: 1px solid rgba(79,195,247,0.2); }
-  .phase[data-color="yellow"] .target { background: rgba(255,209,102,0.08); color: var(--accent4); border: 1px solid rgba(255,209,102,0.2); }
-  .phase[data-color="purple"] .target { background: rgba(199,125,255,0.08); color: var(--accent5); border: 1px solid rgba(199,125,255,0.2); }
+.overlay{position:fixed;inset:0;background:rgba(4,8,11,.78);backdrop-filter:blur(3px);display:none;align-items:flex-end;justify-content:center;z-index:50;padding:0}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--line);border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;padding:24px;animation:up .22s ease}
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.modal h3{font-size:16px;margin-bottom:2px}
+.modal .mdate{color:var(--green);font-size:12px;margin-bottom:16px}
+.entries{margin-bottom:16px}
+.entry{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12px}
+.entry .del{background:none;border:none;color:var(--faint);cursor:pointer;font-size:15px;font-family:var(--mono)}
+.entry .del:hover{color:var(--red)}
+.entry .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:8px}
+.entry .meta{color:var(--dim)}
+.frm{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.frm .full{grid-column:1/-1}
+.fld label{display:block;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.fld select,.fld input{width:100%;background:var(--card);border:1px solid var(--line);color:var(--text);font-family:var(--mono);font-size:13px;padding:9px 10px;border-radius:8px;outline:none}
+.fld select:focus,.fld input:focus{border-color:var(--green)}
+.modal .actions{display:flex;gap:10px;margin-top:18px}
+.modal .actions .log-btn{flex:1}
+.modal .actions .close{background:var(--card);border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:13px;padding:10px 18px;border-radius:10px;cursor:pointer}
+@media(min-width:640px){.overlay{align-items:center;padding:20px}.modal{border-radius:18px}}
 
-  /* DAILY */
-  .daily-schedule { display: flex; flex-direction: column; gap: 10px; }
-  .month-block { border: 1px solid var(--border); overflow: hidden; }
-  .month-title { padding: 9px 14px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Syne', sans-serif; font-weight: 700; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); }
-  .month-schedule { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
-  .time-block { display: grid; grid-template-columns: 76px 1fr; gap: 12px; align-items: start; }
-  .time-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; padding-top: 4px; }
-  .time-tasks { display: flex; flex-direction: column; gap: 4px; }
-  .time-task { font-size: 11px; color: var(--text); line-height: 1.5; padding: 4px 10px; background: rgba(255,255,255,0.02); border-left: 2px solid var(--border); }
-  .phase[data-color="green"] .time-task { border-left-color: rgba(0,255,136,0.25); }
-  .phase[data-color="orange"] .time-task { border-left-color: rgba(255,107,53,0.25); }
-  .phase[data-color="blue"] .time-task { border-left-color: rgba(79,195,247,0.25); }
-  .phase[data-color="yellow"] .time-task { border-left-color: rgba(255,209,102,0.25); }
-  .phase[data-color="purple"] .time-task { border-left-color: rgba(199,125,255,0.25); }
-  .day-note { margin-top: 8px; padding: 7px 12px; font-size: 10px; color: var(--muted); border: 1px dashed var(--border); letter-spacing: 0.5px; }
-
-  /* CF SECTION */
-  .cf-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 2px; color: var(--accent3); margin-bottom: 8px; }
-  .cf-sub { font-size: 11px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
-  .cf-ladder { display: flex; flex-direction: column; gap: 2px; margin-bottom: 36px; }
-  .cf-rank { display: grid; grid-template-columns: 140px 70px 1fr auto; align-items: center; gap: 14px; padding: 14px 18px; border: 1px solid var(--border); background: var(--surface); border-left: 3px solid var(--border); transition: background 0.2s; }
-  .cf-rank:hover { background: rgba(255,255,255,0.02); }
-  .cf-rank.you-are-here { border-left-color: var(--accent2); background: rgba(255,107,53,0.04); }
-  .cf-rank.must-hit { border-left-color: var(--accent1); }
-  .cf-rank.stretch { border-left-color: var(--accent5); }
-  .cf-rank-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; }
-  .cf-rank.you-are-here .cf-rank-name { color: var(--accent2); }
-  .cf-rank.must-hit .cf-rank-name { color: var(--accent1); }
-  .cf-rank.stretch .cf-rank-name { color: var(--accent5); }
-  .cf-rank-rating { font-size: 11px; color: var(--muted); }
-  .cf-rank-how { font-size: 11px; color: var(--text); line-height: 1.6; }
-  .cf-badge { font-size: 9px; letter-spacing: 1px; padding: 3px 8px; white-space: nowrap; }
-  .cf-rank.you-are-here .cf-badge { background: rgba(255,107,53,0.1); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
-  .cf-rank.must-hit .cf-badge { background: rgba(0,255,136,0.1); color: var(--accent1); border: 1px solid rgba(0,255,136,0.2); }
-  .cf-rank.stretch .cf-badge { background: rgba(199,125,255,0.1); color: var(--accent5); border: 1px solid rgba(199,125,255,0.2); }
-  .cf-rank:not(.you-are-here):not(.must-hit):not(.stretch) .cf-badge { background: rgba(255,209,102,0.1); color: var(--accent4); border: 1px solid rgba(255,209,102,0.2); }
-  .cf-rank:not(.you-are-here):not(.must-hit):not(.stretch) .cf-rank-name { color: var(--accent4); }
-
-  .cf-rule-box { padding: 18px 22px; border: 1px solid rgba(79,195,247,0.2); border-left: 3px solid var(--accent3); background: rgba(79,195,247,0.04); margin-bottom: 28px; }
-  .cf-rule-title { font-size: 10px; letter-spacing: 3px; color: var(--accent3); text-transform: uppercase; margin-bottom: 12px; }
-  .cf-rules { display: flex; flex-direction: column; gap: 8px; counter-reset: rule; }
-  .cf-rule { font-size: 11px; color: var(--text); padding-left: 28px; position: relative; line-height: 1.6; counter-increment: rule; }
-  .cf-rule::before { content: "0" counter(rule) "."; position: absolute; left: 0; color: var(--accent3); font-size: 10px; top: 2px; }
-
-  .cf-topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-  .cf-topic-card { padding: 14px; border: 1px solid var(--border); background: var(--surface); }
-  .cf-topic-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent3); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  .cf-topic-items { display: flex; flex-direction: column; gap: 5px; }
-  .cf-topic-item { font-size: 11px; color: var(--text); padding-left: 12px; position: relative; line-height: 1.5; }
-  .cf-topic-item::before { content: '▸'; position: absolute; left: 0; color: var(--accent3); font-size: 9px; top: 2px; }
-
-  /* ENDGAME */
-  .endgame { margin-top: 44px; padding: 26px 30px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(199,125,255,0.04) 0%, transparent 60%); border-left: 3px solid var(--accent5); animation: fadeUp 0.5s 0.55s ease both; }
-  .endgame-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--accent5); margin-bottom: 18px; }
-  .endgame-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 12px; }
-  .endgame-item { display: flex; align-items: flex-start; gap: 10px; }
-  .endgame-check { width: 18px; height: 18px; border: 1px solid var(--accent5); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--accent5); flex-shrink: 0; margin-top: 2px; }
-  .endgame-text { font-size: 11px; line-height: 1.5; color: var(--text); }
-  .endgame-text strong { color: var(--accent5); display: block; font-family: 'Syne', sans-serif; font-size: 12px; margin-bottom: 2px; }
-
-  /* FOOTER */
-  .footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; animation: fadeUp 0.5s 0.6s ease both; }
-  .footer-text { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
-  .footer-text span { color: var(--accent1); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* PHASE PROGRESS BAR */
-  .phase-progress { padding: 0 22px 16px; }
-  .phase-progress-label { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-  .phase-progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .phase-progress-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
-  .phase[data-color="green"] .phase-progress-fill { background: var(--accent1); }
-  .phase[data-color="orange"] .phase-progress-fill { background: var(--accent2); }
-  .phase[data-color="blue"] .phase-progress-fill { background: var(--accent3); }
-  .phase[data-color="yellow"] .phase-progress-fill { background: var(--accent4); }
-  .phase[data-color="purple"] .phase-progress-fill { background: var(--accent5); }
-
-  /* TRACKER TAB */
-  .tracker-section { animation: fadeUp 0.5s ease both; }
-  .tracker-header { margin-bottom: 24px; }
-  .tracker-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 2px; color: var(--accent1); margin-bottom: 6px; }
-  .tracker-sub { font-size: 11px; color: var(--muted); line-height: 1.6; }
-
-  .tracker-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 24px; }
-  .stat-box { padding: 14px 16px; border: 1px solid var(--border); background: var(--surface); }
-  .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; margin-bottom: 4px; }
-  .stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-  .stat-box:nth-child(1) .stat-val { color: var(--accent1); }
-  .stat-box:nth-child(2) .stat-val { color: var(--accent4); }
-  .stat-box:nth-child(3) .stat-val { color: var(--accent3); }
-  .stat-box:nth-child(4) .stat-val { color: var(--accent5); }
-
-  .streak-bar { margin-bottom: 28px; padding: 14px 20px; border: 1px solid rgba(0,255,136,0.2); background: rgba(0,255,136,0.04); border-left: 3px solid var(--accent1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .streak-info { font-size: 11px; color: var(--text); }
-  .streak-info strong { color: var(--accent1); font-size: 20px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; margin-right: 4px; }
-  .streak-msg { font-size: 11px; color: var(--muted); }
-
-  /* YEAR SELECTOR */
-  .year-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .year-selector-label { font-size: 10px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
-  .year-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 5px 14px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px; transition: all 0.2s; letter-spacing: 1px; }
-  .year-btn.active { color: var(--accent1); border-color: var(--accent1); background: rgba(0,255,136,0.06); }
-  .year-btn:hover:not(.active) { color: var(--text); border-color: var(--muted); }
-
-  /* GITHUB GRID */
-  .gh-grid-wrap { overflow-x: auto; padding-bottom: 8px; }
-  .gh-grid { display: flex; gap: 3px; align-items: flex-start; }
-  .gh-month-labels { display: flex; gap: 3px; margin-bottom: 4px; padding-left: 28px; }
-  .gh-month-label { font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
-  .gh-left { display: flex; flex-direction: column; gap: 3px; padding-top: 0px; margin-right: 4px; }
-  .gh-day-label { font-size: 9px; color: var(--muted); height: 13px; display: flex; align-items: center; letter-spacing: 1px; width: 22px; }
-  .gh-cols { display: flex; gap: 3px; }
-  .gh-col { display: flex; flex-direction: column; gap: 3px; }
-  .gh-cell { width: 13px; height: 13px; border-radius: 2px; background: var(--border); cursor: pointer; transition: all 0.1s; border: 1px solid transparent; flex-shrink: 0; position: relative; }
-  .gh-cell:hover { border-color: var(--accent1); transform: scale(1.2); z-index: 10; }
-  .gh-cell.done { background: var(--accent1); }
-  .gh-cell.done-mid { background: #00cc70; }
-  .gh-cell.today { border-color: var(--accent4) !important; }
-  .gh-cell.empty { background: transparent; cursor: default; pointer-events: none; }
-  .gh-cell.future { background: rgba(30,30,46,0.5); cursor: default; pointer-events: none; }
-  .gh-cell[data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); background: #1e1e2e; border: 1px solid var(--border); color: var(--text); font-size: 9px; padding: 3px 7px; white-space: nowrap; pointer-events: none; z-index: 100; letter-spacing: 0.5px; }
-
-  .gh-legend { display: flex; align-items: center; gap: 8px; margin-top: 12px; justify-content: flex-end; }
-  .gh-legend-label { font-size: 9px; color: var(--muted); }
-  .gh-legend-cells { display: flex; gap: 3px; }
-  .gh-legend-cell { width: 13px; height: 13px; border-radius: 2px; }
-
-  @media (max-width: 600px) {
-    .tracks { grid-template-columns: 1fr; }
-    .cf-rank { grid-template-columns: 1fr 1fr; }
-    .cf-rank-how { grid-column: 1 / -1; }
-    .time-block { grid-template-columns: 65px 1fr; }
-    .tracker-stats { grid-template-columns: repeat(2, 1fr); }
-    .gh-cell { width: 10px; height: 10px; }
-  }
+footer{margin-top:70px;color:var(--faint);font-size:11px;text-align:center}
+footer b{color:var(--dim)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#06210f;font-weight:700;font-size:13px;padding:10px 22px;border-radius:10px;transition:transform .3s ease;z-index:60}
+.toast.show{transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
-<div class="container">
 
-  <div class="header">
-    <div class="header-tag">// roadmap.abhishek — 15 months</div>
-    <h1>THE <span>PLAN</span><br>TO AUG 2027</h1>
-    <div class="header-sub">May 2026 → August 2027 · GSoC · GESOC · SDE Placements · DSA · Flutter</div>
-    <div class="header-meta">
-      <div class="meta-pill">LeetCode: <span>110 / 1000+</span></div>
-      <div class="meta-pill">CF Rating: <span>1100 → Expert</span></div>
-      <div class="meta-pill">CGPA: <span>7.2 ✓</span></div>
-      <div class="meta-pill">Stack: <span>Flutter + Spring Boot + Java</span></div>
+<div class="wrap">
+
+<header>
+  <div class="comment">// faang.tracker — abhishek · v1</div>
+  <div class="head-top" style="margin-top:14px">
+    <div class="title">
+      <h1>THE GRIND <span>›</span> <span id="hd-total" style="color:var(--text)">0</span></h1>
+      <div class="sub">DSA · Core Java · System Design · Development — <b id="hd-done">0</b> sessions down, <b id="hd-left">0</b> to go</div>
+    </div>
+    <div class="ring-box">
+      <div class="ring">
+        <svg width="88" height="88" viewBox="0 0 88 88">
+          <circle cx="44" cy="44" r="38" fill="none" stroke="#151e27" stroke-width="7"/>
+          <circle id="ring-fg" cx="44" cy="44" r="38" fill="none" stroke="#2cbb5d" stroke-width="7" stroke-linecap="round" stroke-dasharray="238.7" stroke-dashoffset="238.7"/>
+        </svg>
+        <div class="num"><b id="ring-num">0</b><i>/ 100</i></div>
+      </div>
+      <div class="ring-label">FAANG<br>Readiness<b id="ring-word">warming up</b></div>
     </div>
   </div>
 
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="switchTab('phases')">Phases + Daily</button>
-    <button class="nav-tab" onclick="switchTab('cf')">CF → Expert</button>
-    <button class="nav-tab" onclick="switchTab('tracker')">Daily Tracker</button>
+  <div class="stats">
+    <div class="stat"><div class="accent" style="background:var(--green)"></div><b id="st-done">0</b><span>sessions done</span><small id="st-pct">0% of roadmap</small></div>
+    <div class="stat"><div class="accent" style="background:#5c6bc0"></div><b id="st-left">0</b><span>remaining</span><small id="st-total">of 0 total</small></div>
+    <div class="stat hot"><div class="accent" style="background:var(--green)"></div><b id="st-streak">0</b><span>current streak</span><small id="st-long">longest: 0</small></div>
+    <div class="stat"><div class="accent" style="background:var(--amber)"></div><b id="st-avg">0</b><span>avg / day (14d)</span><small>target: 5 / day</small></div>
+    <div class="stat"><div class="accent" style="background:#ec407a"></div><b id="st-eta">—</b><span>eta @ current pace</span><small id="st-eta5">@5/day: —</small></div>
   </div>
+</header>
 
-  <!-- PHASES TAB -->
-  <div id="tab-phases" class="tab-content active">
-
-    <div class="non-neg">
-      <div class="non-neg-title">// Non-Negotiables — every single week, no exceptions</div>
-      <div class="non-neg-items">
-        <div class="non-neg-item">3 LeetCode problems daily — never zero, no exceptions</div>
-        <div class="non-neg-item">One Codeforces contest per week, always upsolve</div>
-        <div class="non-neg-item">Telusko — 1.5 hrs daily until course complete</div>
+<section>
+  <h2>// Daily Log — click any day</h2>
+  <div class="heat-card">
+    <div class="heat-head">
+      <div class="yr" id="yr-btns"></div>
+      <button class="log-btn" id="btn-today">+ Log today</button>
+    </div>
+    <div class="heat-scroll">
+      <div class="months" id="months"></div>
+      <div class="heat-grid">
+        <div class="dow"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>
+        <div class="weeks" id="weeks"></div>
       </div>
     </div>
-
-    <div class="timeline">
-      <div class="timeline-label">// 15-month overview</div>
-      <div class="timeline-bar">
-        <div class="tl-seg">P1 May–Aug</div>
-        <div class="tl-seg">P2 Sep–Oct</div>
-        <div class="tl-seg">P3 Nov</div>
-        <div class="tl-seg">P4 Dec–Apr</div>
-        <div class="tl-seg">P5 May–Aug</div>
-      </div>
-      <div class="timeline-months">
-        <div class="tl-month">May</div><div class="tl-month">Jun</div><div class="tl-month">Jul</div><div class="tl-month">Aug</div>
-        <div class="tl-month">Sep</div><div class="tl-month">Oct</div><div class="tl-month">Nov</div>
-        <div class="tl-month">Dec</div><div class="tl-month">Jan</div><div class="tl-month">Feb</div><div class="tl-month">Mar</div><div class="tl-month">Apr</div>
-        <div class="tl-month">May</div><div class="tl-month">Jun</div><div class="tl-month">Jul–Aug</div>
-      </div>
-    </div>
-
-    <div class="phases">
-
-      <!-- P1 -->
-      <div class="phase open" data-color="green">
-        <div class="phase-header" onclick="togglePhase(this)">
-          <div class="phase-num">01</div>
-          <div class="phase-info">
-            <div class="phase-period">May – August 2026</div>
-            <div class="phase-title">GESOC + Foundation</div>
-          </div>
-          <div class="phase-toggle">+</div>
-        </div>
-        <div class="phase-progress">
-          <div class="phase-progress-label"><span>Phase Progress</span><span id="p1-pct">0%</span></div>
-          <div class="phase-progress-bar"><div class="phase-progress-fill" id="p1-bar" style="width:0%"></div></div>
-        </div>
-        <div class="phase-body">
-          <div class="phase-content">
-            <div class="inner-tabs">
-              <button class="inner-tab active" onclick="switchInner(this,'p1o')">Overview</button>
-              <button class="inner-tab" onclick="switchInner(this,'p1d')">Daily Schedule</button>
-            </div>
-            <div id="p1o" class="inner-content active">
-              <div class="tracks">
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent1)">DSA</div>
-                  <div class="track-items">
-                    <div class="track-item">4–5 problems/day minimum</div>
-                    <div class="track-item">Basics → Sorting → Arrays → Binary Search → Strings</div>
-                    <div class="track-item">Attempt before looking up solutions</div>
-                    <div class="track-item">Target: 34 → 200+ by August end</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent1)">Codeforces</div>
-                  <div class="track-items">
-                    <div class="track-item">Div 3 weekly — just participate, build the habit</div>
-                    <div class="track-item">Don't stress rating yet</div>
-                    <div class="track-item">Upsolve A and B problems you miss</div>
-                    <div class="track-item">Target: Pupil (1200+) by August</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent1)">GESOC</div>
-                  <div class="track-items">
-                    <div class="track-item">June–Aug: build LG widget project with Gemini AI</div>
-                    <div class="track-item">Attend all 3 mentor meets, ask real questions</div>
-                    <div class="track-item">Present on LG YouTube — personal visibility</div>
-                    <div class="track-item">Start exploring Apache Kafka Java client repo</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent1)">Telusko Spring Boot ← STARTS TODAY</div>
-                  <div class="track-items">
-                    <div class="track-item">June: Core Java → OOPs → Collections → Maven → JDBC</div>
-                    <div class="track-item">July: Spring Boot → REST APIs → Job App project</div>
-                    <div class="track-item">August: JPA → Hibernate → Spring Security → JWT</div>
-                    <div class="track-item">1.5 hrs/day evening — code along every lecture</div>
-                  </div>
-                </div>
-              </div>
-              <div class="targets">
-                <div class="target">LeetCode: 360+ by Aug end</div>
-                <div class="target">CF Pupil → Specialist</div>
-                <div class="target">GESOC complete ✓</div>
-                <div class="target">Telusko: Core Java → Spring Security done</div>
-                <div class="target">Job App project built</div>
-              </div>
-            </div>
-            <div id="p1d" class="inner-content">
-              <div class="daily-schedule">
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent1)">June 10–30 2026 — Core Java + Maven (Telusko Sections 1–5)</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode problems — Arrays mediums, don't skip hard attempts</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">GESOC + Indus — combined 2 hrs max, keep it tight</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Telusko course — 1.5 hrs: Java basics → OOPs → Collections → Maven (sections 1–5)</div><div class="time-task">Code along every lecture — don't just watch</div></div></div>
-                    <div class="time-block"><div class="time-label">Night</div><div class="time-tasks"><div class="time-task">1 CF problem — implementation/greedy filter, rating 1000–1200</div><div class="time-task">Flutter — 20 mins, keep skill warm for GESOC</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF live contest or virtual Div 3 — push toward 1200 Pupil</div><div class="time-task">Upsolve same day — non-negotiable</div><div class="time-task">AtCoder Beginner Contest (Saturday)</div></div></div>
-                    <div class="day-note">Daily: 3 LC + 1 CF + 1.5hr Telusko · CF target: Pupil 1200 by July end</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent1)">July 2026 — Spring Boot Basics + REST (Telusko Sections 6–9)</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode — Binary Search + LinkedList sections</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">GESOC project — Gemini AI integration push</div><div class="time-task">Indus internship tasks</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Telusko — Spring Boot intro, DI, Autowiring, REST APIs, Postman testing</div><div class="time-task">Build the Job App project alongside the course</div></div></div>
-                    <div class="time-block"><div class="time-label">Night</div><div class="time-tasks"><div class="time-task">1 CF problem — binary search / greedy, rating 1100–1300</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest + upsolve</div><div class="time-task">AtCoder Saturday</div></div></div>
-                    <div class="day-note">Daily: 3 LC + 1 CF + 1.5hr Telusko · Dev: Job App project building</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent1)">August 2026 — JPA + Security + GESOC Final Push (Telusko Sections 10–13)</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode — Recursion + Stacks + Queues</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">GESOC final push — present on YouTube, wrap deliverables</div><div class="time-task">Indus tasks</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Telusko — Spring Data JPA, Hibernate, Spring Security, JWT</div><div class="time-task">Add security + JPA to your Job App project</div></div></div>
-                    <div class="time-block"><div class="time-label">Night</div><div class="time-tasks"><div class="time-task">1 CF problem — push for Specialist</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest + upsolve</div><div class="time-task">GESOC documentation — README + demo video</div></div></div>
-                    <div class="day-note">Daily: 3 LC + 1 CF + 1.5hr Telusko · GESOC ends August · LeetCode: ~360 done</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- P2 -->
-      <div class="phase" data-color="orange">
-        <div class="phase-header" onclick="togglePhase(this)">
-          <div class="phase-num">02</div>
-          <div class="phase-info">
-            <div class="phase-period">September – October 2026</div>
-            <div class="phase-title">Post-GESOC Grind</div>
-          </div>
-          <div class="phase-toggle">+</div>
-        </div>
-        <div class="phase-progress">
-          <div class="phase-progress-label"><span>Phase Progress</span><span id="p2-pct">0%</span></div>
-          <div class="phase-progress-bar"><div class="phase-progress-fill" id="p2-bar" style="width:0%"></div></div>
-        </div>
-        <div class="phase-body">
-          <div class="phase-content">
-            <div class="inner-tabs">
-              <button class="inner-tab active" onclick="switchInner(this,'p2o')">Overview</button>
-              <button class="inner-tab" onclick="switchInner(this,'p2d')">Daily Schedule</button>
-            </div>
-            <div id="p2o" class="inner-content active">
-              <div class="tracks">
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent2)">DSA</div>
-                  <div class="track-items">
-                    <div class="track-item">3–5 problems/day — max 5, quality over quantity</div>
-                    <div class="track-item">LinkedList, Recursion, Bit Manip, Stack & Queues</div>
-                    <div class="track-item">Attempt hard problems before looking up</div>
-                    <div class="track-item">Target: 200 → 420+ by October end</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent2)">Codeforces</div>
-                  <div class="track-items">
-                    <div class="track-item">Switch to Div 2 — solve A+B every contest</div>
-                    <div class="track-item">Now start caring about rating</div>
-                    <div class="track-item">Upsolve C problems after every contest</div>
-                    <div class="track-item">Target: Specialist (1400+) approaching</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent2)">Spring Boot (September)</div>
-                  <div class="track-items">
-                    <div class="track-item">Week 1: Spring core — beans, DI, annotations</div>
-                    <div class="track-item">Week 2: REST APIs — controllers, services, repositories</div>
-                    <div class="track-item">Week 3: Spring Data JPA + PostgreSQL</div>
-                    <div class="track-item">Week 4: Spring Security — JWT auth, roles</div>
-                    <div class="track-item">Resource: Amigoscode on YouTube — free + complete</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent2)">Backend Project (October)</div>
-                  <div class="track-items">
-                    <div class="track-item">Flutter + Spring Boot + PostgreSQL full stack</div>
-                    <div class="track-item">JWT auth, REST endpoints, DB relations</div>
-                    <div class="track-item">Gemini API integrated — ties into LG stack</div>
-                    <div class="track-item">Deploy on Railway or Render free tier</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent2)">GSoC 2027 Prep</div>
-                  <div class="track-items">
-                    <div class="track-item">Read LG codebase — find gaps, improvement areas</div>
-                    <div class="track-item">Form your proposal idea early</div>
-                    <div class="track-item">Stay in contact with GESOC mentors</div>
-                    <div class="track-item">Draft proposal outline before November</div>
-                  </div>
-                </div>
-              </div>
-              <div class="targets">
-                <div class="target">LeetCode: 540+ done</div>
-                <div class="target">CF Specialist (1400+)</div>
-                <div class="target">Backend project live + deployed on AWS</div>
-                <div class="target">Telusko: Docker + AWS + Microservices + Spring AI done</div>
-                <div class="target">GSoC proposal outline ready</div>
-              </div>
-            </div>
-            <div id="p2d" class="inner-content">
-              <div class="daily-schedule">
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent2)">September 2026 — Docker + AWS + Build Backend Project (Telusko Sections 14–16)</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode — Graphs + Trees start</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Backend project build — Flutter + Spring Boot + PostgreSQL</div><div class="time-task">Apply everything from Telusko directly into this project</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Telusko — Docker, AWS Elastic Beanstalk, ECS, deploy your project</div><div class="time-task">Add Gemini API to backend project</div></div></div>
-                    <div class="time-block"><div class="time-label">Night</div><div class="time-tasks"><div class="time-task">1 CF problem — graphs/greedy, push Specialist</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF Div 2 contest + upsolve C problems</div><div class="time-task">GSoC proposal brainstorm + LG codebase reading</div></div></div>
-                    <div class="day-note">Daily: 3 LC + 1 CF + 1.5hr Telusko · Backend project: done by Sep 30</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent2)">October 2026 — Microservices + Spring AI + GSoC Proposal (Telusko Sections 17–18)</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode — DP intro problems</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Telusko — Microservices, Spring AI, RAG, Vector Store (awareness level)</div><div class="time-task">Polish backend project — add Kafka producer/consumer</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">GSoC 2027 proposal — write actual draft content</div><div class="time-task">LG codebase deep dive — find your project idea</div></div></div>
-                    <div class="time-block"><div class="time-label">Night</div><div class="time-tasks"><div class="time-task">1 CF problem — attempt C problems this month</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF Div 2 — solve C this month minimum</div><div class="time-task">Deploy backend project on AWS free tier</div></div></div>
-                    <div class="day-note">Daily: 3 LC + 1 CF + Telusko · LeetCode total: ~540 · Backend deployed ✓</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- P3 -->
-      <div class="phase" data-color="blue">
-        <div class="phase-header" onclick="togglePhase(this)">
-          <div class="phase-num">03</div>
-          <div class="phase-info">
-            <div class="phase-period">November 2026</div>
-            <div class="phase-title">GSoC Application</div>
-          </div>
-          <div class="phase-toggle">+</div>
-        </div>
-        <div class="phase-progress">
-          <div class="phase-progress-label"><span>Phase Progress</span><span id="p3-pct">0%</span></div>
-          <div class="phase-progress-bar"><div class="phase-progress-fill" id="p3-bar" style="width:0%"></div></div>
-        </div>
-        <div class="phase-body">
-          <div class="phase-content">
-            <div class="inner-tabs">
-              <button class="inner-tab active" onclick="switchInner(this,'p3o')">Overview</button>
-              <button class="inner-tab" onclick="switchInner(this,'p3d')">Daily Schedule</button>
-            </div>
-            <div id="p3o" class="inner-content active">
-              <div class="tracks">
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent3)">GSoC Proposal</div>
-                  <div class="track-items">
-                    <div class="track-item">2–3 weeks of serious writing — don't rush</div>
-                    <div class="track-item">GESOC mentors know you — use that</div>
-                    <div class="track-item">Clear timeline, real deliverables, technical depth</div>
-                    <div class="track-item">Get mentor review before submitting</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent3)">Codeforces</div>
-                  <div class="track-items">
-                    <div class="track-item">Weekly contest — non-negotiable even this month</div>
-                    <div class="track-item">Consistently attempt C problems</div>
-                    <div class="track-item">Target Specialist before December</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent3)">DSA</div>
-                  <div class="track-items">
-                    <div class="track-item">Hold 5/day — don't drop for proposal writing</div>
-                    <div class="track-item">A2Z nearly complete — start early topic revision</div>
-                    <div class="track-item">Focus on weak topics flagged from CF</div>
-                  </div>
-                </div>
-              </div>
-              <div class="targets">
-                <div class="target">LeetCode ~650 done</div>
-                <div class="target">GSoC proposal submitted</div>
-                <div class="target">Specialist (1400+) hit</div>
-              </div>
-            </div>
-            <div id="p3d" class="inner-content">
-              <div class="daily-schedule">
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent3)">November 2026 — Proposal Month</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 LeetCode problems — revision mode</div><div class="time-task">GSoC proposal writing — 1 hour focused</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Proposal — draft sections, refine timeline</div><div class="time-task">LG codebase — understand what you're proposing deeply</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">CF topic practice — 30 mins</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest + upsolve</div><div class="time-task">Proposal review — send to mentor for feedback</div></div></div>
-                    <div class="day-note">Daily minimum: 3 LC + proposal work · Submit before deadline</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- P4 -->
-      <div class="phase" data-color="yellow">
-        <div class="phase-header" onclick="togglePhase(this)">
-          <div class="phase-num">04</div>
-          <div class="phase-info">
-            <div class="phase-period">December 2026 – April 2027</div>
-            <div class="phase-title">SDE Prep + Compounding</div>
-          </div>
-          <div class="phase-toggle">+</div>
-        </div>
-        <div class="phase-progress">
-          <div class="phase-progress-label"><span>Phase Progress</span><span id="p4-pct">0%</span></div>
-          <div class="phase-progress-bar"><div class="phase-progress-fill" id="p4-bar" style="width:0%"></div></div>
-        </div>
-        <div class="phase-body">
-          <div class="phase-content">
-            <div class="inner-tabs">
-              <button class="inner-tab active" onclick="switchInner(this,'p4o')">Overview</button>
-              <button class="inner-tab" onclick="switchInner(this,'p4d')">Daily Schedule</button>
-            </div>
-            <div id="p4o" class="inner-content active">
-              <div class="tracks">
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">DSA Revision</div>
-                  <div class="track-items">
-                    <div class="track-item">Full A2Z revision — hard problems only</div>
-                    <div class="track-item">Timed mock sessions — simulate interviews</div>
-                    <div class="track-item">Graph, DP, Trees — don't let these rust</div>
-                    <div class="track-item">45-min sessions 3x/week minimum</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">Spring Boot (December)</div>
-                  <div class="track-items">
-                    <div class="track-item">Week 1: Spring core — beans, DI, annotations</div>
-                    <div class="track-item">Week 2: REST APIs — controllers, services, repositories</div>
-                    <div class="track-item">Week 3: Spring Data JPA + PostgreSQL</div>
-                    <div class="track-item">Week 4: Spring Security — JWT auth, roles</div>
-                    <div class="track-item">Resource: Amigoscode on YouTube — free + complete</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">Backend Project (January)</div>
-                  <div class="track-items">
-                    <div class="track-item">Flutter + Spring Boot + PostgreSQL full stack</div>
-                    <div class="track-item">JWT auth, REST endpoints, DB relations</div>
-                    <div class="track-item">Gemini API integrated — ties into LG experience</div>
-                    <div class="track-item">Deploy it — Railway or Render free tier</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">Core CS (Feb–Mar)</div>
-                  <div class="track-items">
-                    <div class="track-item">OOPs — Java concepts + design patterns basics</div>
-                    <div class="track-item">DBMS — SQL, normalization, transactions, indexing</div>
-                    <div class="track-item">OS — processes, threads, memory, scheduling</div>
-                    <div class="track-item">CN — HTTP, TCP/IP, DNS, REST — interview level</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">Codeforces → Expert</div>
-                  <div class="track-items">
-                    <div class="track-item">Push for Expert (1600+) — the stretch goal</div>
-                    <div class="track-item">Div 2 — consistently solve C, attempt D</div>
-                    <div class="track-item">DP + Graphs deep practice this phase</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent4)">Placement Prep</div>
-                  <div class="track-items">
-                    <div class="track-item">Resume — all 3 projects, GSoC, GESOC on it</div>
-                    <div class="track-item">LinkedIn polished and active</div>
-                    <div class="track-item">Know every project inside out for HR rounds</div>
-                    <div class="track-item">Target list: Razorpay, CRED, Google, Atlassian</div>
-                  </div>
-                </div>
-              </div>
-              <div class="targets">
-                <div class="target">A2Z fully revised</div>
-                <div class="target">CF Expert push (1600+)</div>
-                <div class="target">Backend project live</div>
-                <div class="target">OOPs + DBMS + OS + CN done</div>
-                <div class="target">Resume ready</div>
-                <div class="target">GSoC result: April</div>
-              </div>
-            </div>
-            <div id="p4d" class="inner-content">
-              <div class="daily-schedule">
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent4)">December 2026 – January 2027 — Build Backend</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 A2Z revision problems — hard problems only, timed</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Dec: Spring Boot learning — 2 hrs (Amigoscode, follow the series)</div><div class="time-task">Jan: Backend project build — Flutter + Spring Boot + PostgreSQL</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">3 more DSA problems — interview style, timed</div><div class="time-task">CF topic drill — DP or graphs, 30 mins</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF Div 2 + upsolve C and D problems</div><div class="time-task">Gemini API integration into backend</div></div></div>
-                    <div class="day-note">Goal: backend project done by Jan 31 · Daily minimum: 3 LC</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent4)">February 2027 — OOPs + DBMS</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 DSA problems — interview mock, timed 45 mins</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">OOPs — 1 hr (week 1–2)</div><div class="time-task">DBMS — 1 hr (week 3–4), SQL practice included</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">3 more DSA problems</div><div class="time-task">Resume work — 20 mins/day</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest + upsolve</div><div class="time-task">Mock interview session — full 45 mins</div></div></div>
-                    <div class="day-note">Feb: OOPs (wk 1–2) + DBMS (wk 3–4) · Daily minimum: 3 LC</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent4)">March 2027 — OS + CN</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3 DSA problems — company-specific problem sets</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">OS — 1 hr (week 1–2): processes, threads, memory</div><div class="time-task">CN — 1 hr (week 3–4): HTTP, TCP, DNS, REST</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">3 DSA problems + system design basics intro</div><div class="time-task">LinkedIn active — connect with engineers at target companies</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest — Expert push</div><div class="time-task">Full mock interview: DSA + CS fundamentals</div></div></div>
-                    <div class="day-note">Mar: OS (wk 1–2) + CN (wk 3–4) · Daily minimum: 3 LC</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent4)">April 2027 — Polish + GSoC Result</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">3–5 LeetCode problems — placement rounds incoming, stay sharp</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Revise all 4 CS subjects — interview questions style</div><div class="time-task">System design basics — high-level awareness</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Resume final version — get someone to review it</div><div class="time-task">Research target companies + application prep</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest — Expert rating push</div><div class="time-task">GSoC result drops this month — either way, you're ready</div></div></div>
-                    <div class="day-note">GSoC result: April · Resume done · All subjects revised</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- P5 -->
-      <div class="phase" data-color="purple">
-        <div class="phase-header" onclick="togglePhase(this)">
-          <div class="phase-num">05</div>
-          <div class="phase-info">
-            <div class="phase-period">May – August 2027</div>
-            <div class="phase-title">GSoC 2027 + Placements</div>
-          </div>
-          <div class="phase-toggle">+</div>
-        </div>
-        <div class="phase-progress">
-          <div class="phase-progress-label"><span>Phase Progress</span><span id="p5-pct">0%</span></div>
-          <div class="phase-progress-bar"><div class="phase-progress-fill" id="p5-bar" style="width:0%"></div></div>
-        </div>
-        <div class="phase-body">
-          <div class="phase-content">
-            <div class="inner-tabs">
-              <button class="inner-tab active" onclick="switchInner(this,'p5o')">Overview</button>
-              <button class="inner-tab" onclick="switchInner(this,'p5d')">Daily Schedule</button>
-            </div>
-            <div id="p5o" class="inner-content active">
-              <div class="tracks">
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent5)">GSoC 2027</div>
-                  <div class="track-items">
-                    <div class="track-item">Execute proposal deliverables on schedule</div>
-                    <div class="track-item">Weekly mentor check-ins — stay visible</div>
-                    <div class="track-item">Mid-term evaluation: June</div>
-                    <div class="track-item">Final evaluation: August</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent5)">Graduation</div>
-                  <div class="track-items">
-                    <div class="track-item">Finish final year strong — May/June</div>
-                    <div class="track-item">Final year project wrap-up</div>
-                    <div class="track-item">Grades solid — placement eligibility intact</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent5)">Placements</div>
-                  <div class="track-items">
-                    <div class="track-item">On-campus drives — apply to everything relevant</div>
-                    <div class="track-item">Off-campus opens July–August — apply aggressively</div>
-                    <div class="track-item">DSA sharp — placement rounds are pure DSA</div>
-                    <div class="track-item">GSoC + GESOC + backend = strong talking points</div>
-                  </div>
-                </div>
-                <div class="track">
-                  <div class="track-label" style="color:var(--accent5)">DSA</div>
-                  <div class="track-items">
-                    <div class="track-item">3–4 problems/day — maintain sharpness</div>
-                    <div class="track-item">Mock interviews 2x/week minimum</div>
-                    <div class="track-item">Company-specific problem sets</div>
-                  </div>
-                </div>
-              </div>
-              <div class="targets">
-                <div class="target">GSoC 2027 passed ✓</div>
-                <div class="target">Graduated ✓</div>
-                <div class="target">Placement secured ✓</div>
-                <div class="target">2 LG projects ✓</div>
-              </div>
-            </div>
-            <div id="p5d" class="inner-content">
-              <div class="daily-schedule">
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent5)">May – June 2027 — GSoC + Graduation</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">GSoC project work — 2–3 hours (main priority)</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">College final year wrap-up + exams</div><div class="time-task">3 DSA problems — stay placement-ready</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">Mock interview or company-specific prep</div><div class="time-task">Apply to on-campus as drives open</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">CF contest — maintain rating</div><div class="time-task">GSoC mid-term prep (June evaluation)</div></div></div>
-                    <div class="day-note">GSoC mid-term: June · Balance project + placement</div>
-                  </div>
-                </div>
-                <div class="month-block">
-                  <div class="month-title" style="color:var(--accent5)">July – August 2027 — Final Push</div>
-                  <div class="month-schedule">
-                    <div class="time-block"><div class="time-label">Morning</div><div class="time-tasks"><div class="time-task">GSoC final deliverables — wrap everything up cleanly</div></div></div>
-                    <div class="time-block"><div class="time-label">Afternoon</div><div class="time-tasks"><div class="time-task">Off-campus applications — apply aggressively</div><div class="time-task">Interview prep — company-specific problems</div></div></div>
-                    <div class="time-block"><div class="time-label">Evening</div><div class="time-tasks"><div class="time-task">4 DSA problems — placement rounds are pure DSA</div><div class="time-task">Mock interview 2x/week</div></div></div>
-                    <div class="time-block"><div class="time-label">Weekend</div><div class="time-tasks"><div class="time-task">GSoC final evaluation prep (August)</div><div class="time-task">Rest — don't burn out at the finish line</div></div></div>
-                    <div class="day-note">GSoC final: August · Off-campus: July–Aug · You're ready</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end phases -->
-
-    <!-- ENDGAME -->
-    <div class="endgame">
-      <div class="endgame-title">// AUGUST 2027 — WHAT YOU'LL HAVE</div>
-      <div class="endgame-items">
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>2 Liquid Galaxy Projects</strong>GESOC 2026 + GSoC 2027 — mentors know your name</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>1000+ LeetCode Problems</strong>474 A2Z + company-specific sets, Knight rank target</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>CF Specialist → Expert</strong>1400–1600+ rating, contest-hardened</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>Full-Stack Backend Project</strong>Flutter + Spring Boot + PostgreSQL + Gemini API</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>Core CS Done</strong>OOPs, DBMS, OS, CN — SDE interview ready</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>8+ Months Flutter/App Dev</strong>Real projects, not tutorials</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>B.Tech Graduated</strong>7.2 CGPA — clears all product company cutoffs</div></div>
-        <div class="endgame-item"><div class="endgame-check">✓</div><div class="endgame-text"><strong>SDE Placement Ready</strong>Target: 15–25 LPA · Stretch: Google/Microsoft</div></div>
-      </div>
-    </div>
-
-  </div><!-- end tab-phases -->
-
-  <!-- CF TAB -->
-  <div id="tab-cf" class="tab-content">
-    <div style="animation: fadeUp 0.5s ease both;">
-
-      <div class="cf-title">UNRATED → EXPERT</div>
-      <div class="cf-sub">Realistic in 15 months with consistent weekly contests + topic drilling.<br>Specialist (1400) = must-hit. Expert (1600) = stretch goal. Both are achievable.</div>
-
-      <div class="cf-ladder">
-        <div class="cf-rank you-are-here">
-          <div class="cf-rank-name">Newbie</div>
-          <div class="cf-rank-rating">0 – 1199</div>
-          <div class="cf-rank-how">You're here. Start Div 3 contests. Solve A and B. Don't stress rating — just participate weekly and upsolve everything.</div>
-          <div class="cf-badge">YOU ARE HERE</div>
-        </div>
-        <div class="cf-rank">
-          <div class="cf-rank-name">Pupil</div>
-          <div class="cf-rank-rating">1200 – 1399</div>
-          <div class="cf-rank-how">Solve Div 3 A, B, C consistently. Basic greedy, simple math, implementation. Upsolve everything you miss. Target: August 2026.</div>
-          <div class="cf-badge">AUG 2026</div>
-        </div>
-        <div class="cf-rank must-hit">
-          <div class="cf-rank-name">Specialist</div>
-          <div class="cf-rank-rating">1400 – 1599</div>
-          <div class="cf-rank-how">Switch to Div 2. Solve A+B every contest, attempt C. Topics: greedy, binary search, two pointers, basic DP, number theory basics.</div>
-          <div class="cf-badge">MUST HIT — NOV 2026</div>
-        </div>
-        <div class="cf-rank stretch">
-          <div class="cf-rank-name">Expert</div>
-          <div class="cf-rank-rating">1600 – 1899</div>
-          <div class="cf-rank-how">Consistently solve Div 2 C. Attempt D regularly. Topics: DP (all types), graphs (BFS/DFS/Dijkstra), segment trees, advanced greedy.</div>
-          <div class="cf-badge">STRETCH — APR 2027</div>
-        </div>
-      </div>
-
-      <div class="cf-rule-box">
-        <div class="cf-rule-title">// The Only Rules That Matter</div>
-        <div class="cf-rules">
-          <div class="cf-rule">Never skip a contest. Consistency beats intensity on CF every single time.</div>
-          <div class="cf-rule">Upsolve immediately after every contest — editorial for anything above your level.</div>
-          <div class="cf-rule">Topic-wise practice targeting your next rank's problem types — not random grinding.</div>
-          <div class="cf-rule">One contest/week minimum. Two is better during the Sep–Apr grind phase.</div>
-          <div class="cf-rule">After a bad contest, upsolve more — don't take a break. Bad contests are the biggest learning.</div>
-        </div>
-      </div>
-
-      <div style="font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;">// Topics to master per rank jump</div>
-      <div class="cf-topics">
-        <div class="cf-topic-card">
-          <div class="cf-topic-title">Newbie → Pupil (Now – Aug 2026)</div>
-          <div class="cf-topic-items">
-            <div class="cf-topic-item">Basic implementation — simulate what's asked</div>
-            <div class="cf-topic-item">Simple math — modulo, primes, GCD, LCM</div>
-            <div class="cf-topic-item">Sorting and linear searching</div>
-            <div class="cf-topic-item">Basic greedy — simplest approach first</div>
-            <div class="cf-topic-item">String manipulation</div>
-            <div class="cf-topic-item">Brute force — optimize only when TLE</div>
-          </div>
-        </div>
-        <div class="cf-topic-card">
-          <div class="cf-topic-title">Pupil → Specialist (Sep – Nov 2026)</div>
-          <div class="cf-topic-items">
-            <div class="cf-topic-item">Binary search on answer — classic technique</div>
-            <div class="cf-topic-item">Two pointers + sliding window</div>
-            <div class="cf-topic-item">Prefix sums — 1D and 2D</div>
-            <div class="cf-topic-item">Basic DP — knapsack, LCS, LIS</div>
-            <div class="cf-topic-item">Number theory — sieve of Eratosthenes, modular inverse</div>
-            <div class="cf-topic-item">Greedy with proofs — learn to justify your approach</div>
-          </div>
-        </div>
-        <div class="cf-topic-card">
-          <div class="cf-topic-title">Specialist → Expert (Dec 2026 – Apr 2027)</div>
-          <div class="cf-topic-items">
-            <div class="cf-topic-item">Graph algorithms — BFS, DFS, Dijkstra, Floyd-Warshall</div>
-            <div class="cf-topic-item">Tree problems — LCA, diameter, DFS on trees</div>
-            <div class="cf-topic-item">Advanced DP — bitmask, digit DP, interval DP</div>
-            <div class="cf-topic-item">Segment trees + BIT (Fenwick tree)</div>
-            <div class="cf-topic-item">Constructive algorithms</div>
-            <div class="cf-topic-item">Game theory basics — Nim, Sprague-Grundy</div>
-          </div>
-        </div>
-        <div class="cf-topic-card">
-          <div class="cf-topic-title">Weekly Practice Structure</div>
-          <div class="cf-topic-items">
-            <div class="cf-topic-item">Mon–Fri: 30 min topic drill (1–2 rated problems)</div>
-            <div class="cf-topic-item">Sat or Sun: Live contest — no skipping ever</div>
-            <div class="cf-topic-item">Same day after contest: Upsolve all missed problems</div>
-            <div class="cf-topic-item">Every 2 weeks: Virtual contest on old rounds</div>
-            <div class="cf-topic-item">Track weak topics — drill those more than strengths</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- end tab-cf -->
-
-  <!-- TRACKER TAB -->
-  <div id="tab-tracker" class="tab-content">
-    <div class="tracker-section">
-      <div class="tracker-header">
-        <div class="tracker-title">DAILY TRACKER</div>
-        <div class="tracker-sub">Click any square to mark the day done. Saves in your browser. Exactly like GitHub's contribution graph.</div>
-      </div>
-
-      <div class="tracker-stats">
-        <div class="stat-box"><div class="stat-val" id="stat-total">0</div><div class="stat-label">Total Days Done</div></div>
-        <div class="stat-box"><div class="stat-val" id="stat-streak">0</div><div class="stat-label">Current Streak</div></div>
-        <div class="stat-box"><div class="stat-val" id="stat-longest">0</div><div class="stat-label">Longest Streak</div></div>
-        <div class="stat-box"><div class="stat-val" id="stat-pct">0%</div><div class="stat-label">This Month</div></div>
-      </div>
-
-      <div class="streak-bar">
-        <div class="streak-info"><strong id="streak-big">0</strong> day streak</div>
-        <div class="streak-msg" id="streak-msg">Start today — tick the first box.</div>
-      </div>
-
-      <div class="year-selector">
-        <span class="year-selector-label">// Year</span>
-        <button class="year-btn active" onclick="switchYear(2026, this)">2026</button>
-        <button class="year-btn" onclick="switchYear(2027, this)">2027</button>
-      </div>
-
-      <div class="gh-grid-wrap">
-        <div id="gh-month-labels" class="gh-month-labels"></div>
-        <div class="gh-grid">
-          <div class="gh-left">
-            <div class="gh-day-label"></div>
-            <div class="gh-day-label">MON</div>
-            <div class="gh-day-label"></div>
-            <div class="gh-day-label">WED</div>
-            <div class="gh-day-label"></div>
-            <div class="gh-day-label">FRI</div>
-            <div class="gh-day-label"></div>
-          </div>
-          <div id="gh-cols" class="gh-cols"></div>
-        </div>
-      </div>
-
-      <div class="gh-legend">
-        <span class="gh-legend-label">Less</span>
-        <div class="gh-legend-cells">
-          <div class="gh-legend-cell" style="background:var(--border)"></div>
-          <div class="gh-legend-cell" style="background:#005c33"></div>
-          <div class="gh-legend-cell" style="background:#008a48"></div>
-          <div class="gh-legend-cell" style="background:#00b85f"></div>
-          <div class="gh-legend-cell" style="background:var(--accent1)"></div>
-        </div>
-        <span class="gh-legend-label">More</span>
-      </div>
+    <div class="heat-foot">
+      <div class="legend" id="legend"></div>
     </div>
   </div>
+</section>
 
-  <div class="footer">
-    <div class="footer-text">updated <span>June 10, 2026</span> — v6</div>
-    <div class="footer-text">abhishek · <span>15 months to Aug 2027</span></div>
+<section>
+  <h2>// Topic Progress</h2>
+  <div class="bars" id="topic-bars"></div>
+</section>
+
+<section>
+  <h2>// Question Tracker</h2>
+  <div class="qgrid">
+    <div class="qcard">
+      <div class="lbl">LeetCode solved</div>
+      <div class="big" id="q-lc">0</div>
+      <div class="goal">target <b>500+</b> · rating goal <b>Knight → Guardian</b></div>
+    </div>
+    <div class="qcard">
+      <div class="lbl">Codeforces solved</div>
+      <div class="big" id="q-cf">0</div>
+      <div class="goal">rating <b>1197</b> · goal <b>Expert 1600+</b></div>
+    </div>
+    <div class="qcard">
+      <div class="lbl">Total questions</div>
+      <div class="big" id="q-total">0</div>
+      <div class="goal">every one interview-quality</div>
+    </div>
+    <div class="qcard">
+      <div class="lbl">Days logged</div>
+      <div class="big" id="q-days">0</div>
+      <div class="goal">consistency beats intensity</div>
+    </div>
   </div>
+</section>
 
+<section>
+  <h2>// Company Readiness</h2>
+  <div class="bars cbars" id="company-bars"></div>
+</section>
+
+<section>
+  <h2>// Data</h2>
+  <div class="io">
+    <button id="btn-export">Export backup (.json)</button>
+    <label for="imp">Import backup<input type="file" id="imp" accept=".json"></label>
+    <button class="danger" id="btn-reset">Reset everything</button>
+  </div>
+  <div class="saved">Data saves automatically in this browser. Export a backup before clearing browser data or switching devices.</div>
+</section>
+
+<footer>abhishek · <b>grind → offer</b> · started july 9, 2026</footer>
 </div>
 
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>Log session</h3>
+    <div class="mdate" id="m-date"></div>
+    <div class="entries" id="m-entries"></div>
+    <div class="frm">
+      <div class="fld full"><label>Topic</label><select id="f-topic"></select></div>
+      <div class="fld"><label>Sessions</label><input type="number" id="f-sess" min="0" max="30" value="1"></div>
+      <div class="fld"><label>LeetCode solved</label><input type="number" id="f-lc" min="0" max="50" value="0"></div>
+      <div class="fld"><label>Codeforces solved</label><input type="number" id="f-cf" min="0" max="50" value="0"></div>
+      <div class="fld"><label>Note</label><input type="text" id="f-note" placeholder="optional" maxlength="80"></div>
+    </div>
+    <div class="actions">
+      <button class="log-btn" id="btn-save">Save entry</button>
+      <button class="close" id="btn-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved ✓</div>
+
 <script>
-  const STORE_KEY = 'abhishek_tracker_v2';
-  const PHASES = [
-    { id: 1, start: new Date(2026, 4, 1),  end: new Date(2026, 7, 31) },
-    { id: 2, start: new Date(2026, 8, 1),  end: new Date(2026, 9, 31) },
-    { id: 3, start: new Date(2026, 10, 1), end: new Date(2026, 10, 30) },
-    { id: 4, start: new Date(2026, 11, 1), end: new Date(2027, 3, 30) },
-    { id: 5, start: new Date(2027, 4, 1),  end: new Date(2027, 7, 31) },
-  ];
-  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const ROADMAP=[
+{id:'hash',name:'Hashing',total:112,color:'#4dd0e1'},
+{id:'bs',name:'Binary Search',total:51,color:'#ffb300'},
+{id:'tp',name:'Two Pointer',total:21,color:'#ff7043'},
+{id:'sw',name:'Sliding Window',total:13,color:'#9ccc65'},
+{id:'impl',name:'Implementation',total:10,color:'#90a4ae'},
+{id:'heap',name:'Heap',total:13,color:'#ec407a'},
+{id:'stack',name:'Stack',total:17,color:'#26a69a'},
+{id:'queue',name:'Queue',total:3,color:'#7e57c2'},
+{id:'graph',name:'Graphs',total:32,color:'#66bb6a'},
+{id:'tree',name:'Trees',total:45,color:'#ab47bc'},
+{id:'ll',name:'Linked List',total:16,color:'#29b6f6'},
+{id:'rec',name:'Recursion',total:4,color:'#ef5350'},
+{id:'dp',name:'Dynamic Programming',total:119,color:'#5c6bc0'},
+{id:'ddp',name:'Digit DP',total:4,color:'#3949ab'},
+{id:'bit',name:'Bit Manipulation',total:38,color:'#c0ca33'},
+{id:'greedy',name:'Greedy',total:69,color:'#ffa726'},
+{id:'java',name:'Core Java',total:50,color:'#ff8f00'},
+{id:'sd',name:'System Design',total:50,color:'#fdd835'},
+{id:'dev',name:'Development',total:50,color:'#e53935'},
+{id:'rev',name:'Revision',total:0,color:'#9e9e9e'}
+];
+const TOPIC={};ROADMAP.forEach(t=>TOPIC[t.id]=t);
+const TOTAL=ROADMAP.reduce((a,t)=>a+t.total,0);
+const COMPANIES=[
+{name:'Atlassian',m:.92},{name:'Amazon',m:.77},{name:'Rubrik',m:.69},
+{name:'Salesforce',m:.69},{name:'Uber',m:.62},{name:'TikTok',m:.58},
+{name:'Google',m:.54},{name:'Meta',m:.54},{name:'Microsoft',m:.58},
+{name:'Top Startups',m:1.15},{name:'HFT (Jane St / HRT)',m:.19}
+];
+const KEY='faang-tracker-v1';
+const DEFAULT={baseline:{topics:{hash:20},lc:160,cf:48},logs:{}};
+let DATA=null,viewYear=new Date().getFullYear(),modalDate=null;
 
-  let doneDays = {};
-  try { doneDays = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
-  let viewYear = 2026;
+const hasWS=typeof window.storage!=='undefined'&&window.storage&&typeof window.storage.get==='function';
+async function loadData(){
+  if(hasWS){try{const r=await window.storage.get(KEY);if(r&&r.value)return JSON.parse(r.value)}catch(e){}}
+  else{try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}}
+  return JSON.parse(JSON.stringify(DEFAULT));
+}
+async function saveData(){
+  const s=JSON.stringify(DATA);
+  if(hasWS){try{await window.storage.set(KEY,s)}catch(e){}}
+  else{try{localStorage.setItem(KEY,s)}catch(e){}}
+}
 
-  function saveData() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(doneDays)); } catch(e) {}
-  }
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function todayISO(){return iso(new Date())}
+function fmt(dISO){const d=new Date(dISO+'T12:00:00');return d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}
 
-  function dayKey(y, m, d) {
-    return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  }
+function topicSessions(){
+  const m={};ROADMAP.forEach(t=>m[t.id]=(DATA.baseline.topics[t.id]||0));
+  Object.values(DATA.logs).forEach(arr=>arr.forEach(e=>{m[e.t]=(m[e.t]||0)+(e.s||0)}));
+  return m;
+}
+function sessionsDone(){
+  const m=topicSessions();let s=0;
+  ROADMAP.forEach(t=>{if(t.id!=='rev')s+=Math.min(m[t.id],t.total)});
+  return s;
+}
+function daySessions(dISO){const a=DATA.logs[dISO];return a?a.reduce((x,e)=>x+(e.s||0),0):0}
+function dayDominant(dISO){
+  const a=DATA.logs[dISO];if(!a||!a.length)return null;
+  const c={};a.forEach(e=>c[e.t]=(c[e.t]||0)+(e.s||1));
+  return Object.keys(c).sort((x,y)=>c[y]-c[x])[0];
+}
+function lcTotal(){return DATA.baseline.lc+Object.values(DATA.logs).flat().reduce((a,e)=>a+(e.lc||0),0)}
+function cfTotal(){return DATA.baseline.cf+Object.values(DATA.logs).flat().reduce((a,e)=>a+(e.cf||0),0)}
+function loggedDays(){return Object.keys(DATA.logs).filter(d=>DATA.logs[d].length).sort()}
+function streaks(){
+  const days=new Set(loggedDays());
+  let cur=0,d=new Date();
+  if(!days.has(iso(d)))d.setDate(d.getDate()-1);
+  while(days.has(iso(d))){cur++;d.setDate(d.getDate()-1)}
+  let long=0;const arr=[...days].sort();
+  let run=0,prev=null;
+  arr.forEach(x=>{
+    if(prev){const p=new Date(prev+'T12:00:00'),c=new Date(x+'T12:00:00');
+      run=((c-p)/86400000===1)?run+1:1;
+    }else run=1;
+    long=Math.max(long,run);prev=x;
+  });
+  return{cur,long};
+}
+function avg14(){
+  let s=0;const d=new Date();
+  for(let i=0;i<14;i++){s+=daySessions(iso(d));d.setDate(d.getDate()-1)}
+  return s/14;
+}
+function readiness(){
+  const m=topicSessions();
+  const dsaTotal=ROADMAP.filter(t=>!['java','sd','dev','rev'].includes(t.id)).reduce((a,t)=>a+t.total,0);
+  const dsaDone=ROADMAP.filter(t=>!['java','sd','dev','rev'].includes(t.id)).reduce((a,t)=>a+Math.min(m[t.id],t.total),0);
+  const dsa=dsaDone/dsaTotal;
+  const java=Math.min(m.java/50,1),sd=Math.min(m.sd/50,1),dev=Math.min(m.dev/50,1);
+  const lc=Math.max(0,Math.min((lcTotal()-160)/340,1)),cf=Math.max(0,Math.min((cfTotal()-48)/252,1));
+  const sc=26+dsa*30+java*6+dev*9+sd*9+lc*10+cf*5;
+  return Math.min(100,Math.round(sc));
+}
+function readinessWord(s){
+  if(s<30)return'warming up';if(s<45)return'building';if(s<60)return'getting real';
+  if(s<75)return'dangerous';if(s<90)return'interview ready';return'go get it';
+}
 
-  function todayObj() {
-    const t = new Date();
-    return { y: t.getFullYear(), m: t.getMonth(), d: t.getDate() };
-  }
+function render(){
+  const done=sessionsDone(),left=TOTAL-done,st=streaks(),av=avg14();
+  document.getElementById('hd-total').textContent=TOTAL;
+  document.getElementById('st-total').textContent='of '+TOTAL+' total';
+  document.getElementById('hd-done').textContent=done;
+  document.getElementById('hd-left').textContent=left;
+  document.getElementById('st-done').textContent=done;
+  document.getElementById('st-pct').textContent=(done/TOTAL*100).toFixed(1)+'% of roadmap';
+  document.getElementById('st-left').textContent=left;
+  document.getElementById('st-streak').textContent=st.cur;
+  document.getElementById('st-long').textContent='longest: '+st.long;
+  document.getElementById('st-avg').textContent=av.toFixed(1);
+  const pace=av>0.3?av:5;
+  const eta=new Date();eta.setDate(eta.getDate()+Math.ceil(left/pace));
+  const eta5=new Date();eta5.setDate(eta5.getDate()+Math.ceil(left/5));
+  document.getElementById('st-eta').textContent=eta.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'});
+  document.getElementById('st-eta5').textContent='@5/day: '+eta5.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'});
+  const sc=readiness();
+  document.getElementById('ring-num').textContent=sc;
+  document.getElementById('ring-word').textContent=readinessWord(sc);
+  document.getElementById('ring-fg').style.strokeDashoffset=238.7*(1-sc/100);
+  document.getElementById('q-lc').textContent=lcTotal();
+  document.getElementById('q-cf').textContent=cfTotal();
+  document.getElementById('q-total').textContent=lcTotal()+cfTotal();
+  document.getElementById('q-days').textContent=loggedDays().length;
+  renderTopics();renderCompanies();renderHeatmap();
+}
 
-  function toggleDay(k) {
-    if (doneDays[k]) delete doneDays[k]; else doneDays[k] = 1;
-    saveData();
-    renderYearGrid(viewYear);
-    updateStats();
-    updatePhaseProgress();
-  }
+function renderTopics(){
+  const m=topicSessions();const box=document.getElementById('topic-bars');box.innerHTML='';
+  ROADMAP.filter(t=>t.id!=='rev').forEach(t=>{
+    const d=Math.min(m[t.id],t.total),p=t.total?d/t.total*100:0;
+    const row=document.createElement('div');row.className='bar-row';
+    row.innerHTML='<div class="bar-top"><span class="nm">'+t.name+(p>=100?'<span class="done-tag">✓ DONE</span>':'')+'</span><span class="ct"><b>'+d+'</b> / '+t.total+'</span></div><div class="track"><div class="fill" style="width:'+p+'%;background:'+t.color+'"></div></div>';
+    box.appendChild(row);
+  });
+}
+function renderCompanies(){
+  const sc=readiness();const box=document.getElementById('company-bars');box.innerHTML='';
+  COMPANIES.forEach(c=>{
+    const v=Math.min(100,Math.round(sc*c.m));
+    const col=v<30?'#e5534b':v<60?'#ffb300':'#2cbb5d';
+    const row=document.createElement('div');row.className='bar-row';
+    row.innerHTML='<div class="bar-top"><span class="nm">'+c.name+'</span><span class="ct"><b>'+v+'</b> / 100</span></div><div class="track"><div class="fill" style="width:'+v+'%;background:'+col+'"></div></div>';
+    box.appendChild(row);
+  });
+}
 
-  function switchYear(yr, btn) {
-    viewYear = yr;
-    document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderYearGrid(yr);
-  }
-
-  function renderYearGrid(year) {
-    const t = todayObj();
-    const today = new Date(t.y, t.m, t.d);
-
-    // Build weeks: start from first Sunday on or before Jan 1
-    const jan1 = new Date(year, 0, 1);
-    const startSun = new Date(jan1);
-    startSun.setDate(jan1.getDate() - jan1.getDay()); // back to Sunday
-
-    // End: last Saturday on or after Dec 31
-    const dec31 = new Date(year, 11, 31);
-    const endSat = new Date(dec31);
-    endSat.setDate(dec31.getDate() + (6 - dec31.getDay()));
-
-    // Build column-per-week structure
-    let weeks = [];
-    let cur = new Date(startSun);
-    while (cur <= endSat) {
-      let week = [];
-      for (let d = 0; d < 7; d++) {
-        week.push(new Date(cur));
-        cur.setDate(cur.getDate() + 1);
-      }
-      weeks.push(week);
-    }
-
-    // Month label positions
-    let monthPositions = {};
-    weeks.forEach((week, wi) => {
-      week.forEach(day => {
-        if (day.getFullYear() === year && day.getDate() === 1) {
-          monthPositions[wi] = MONTH_NAMES[day.getMonth()];
+function renderYearBtns(){
+  const box=document.getElementById('yr-btns');box.innerHTML='';
+  [2026,2027].forEach(y=>{
+    const b=document.createElement('button');b.textContent=y;
+    if(y===viewYear)b.classList.add('on');
+    b.onclick=()=>{viewYear=y;renderYearBtns();renderHeatmap()};
+    box.appendChild(b);
+  });
+}
+function renderHeatmap(){
+  const weeksBox=document.getElementById('weeks');weeksBox.innerHTML='';
+  const monthsBox=document.getElementById('months');monthsBox.innerHTML='';
+  const tISO=todayISO();
+  const start=new Date(viewYear,0,1),end=new Date(viewYear,11,31);
+  const first=new Date(start);first.setDate(first.getDate()-first.getDay());
+  let d=new Date(first);
+  const monthPos=[];let wk=0;
+  while(d<=end){
+    const col=document.createElement('div');col.className='week';
+    for(let i=0;i<7;i++){
+      const cell=document.createElement('div');cell.className='cell';
+      if(d.getFullYear()!==viewYear){cell.classList.add('empty')}
+      else{
+        const dI=iso(d);
+        if(d.getDate()===1)monthPos.push({wk,m:d.getMonth()});
+        const s=daySessions(dI),dom=dayDominant(dI);
+        if(dom){
+          const op=s>=5?1:s>=4?.82:s>=3?.66:s>=2?.5:.36;
+          cell.style.background=TOPIC[dom].color;cell.style.opacity=op;
         }
-      });
-    });
-
-    // Render month labels
-    const labelsEl = document.getElementById('gh-month-labels');
-    let labHtml = '';
-    let lastLabelWi = -3;
-    weeks.forEach((week, wi) => {
-      if (monthPositions[wi] && wi - lastLabelWi > 2) {
-        labHtml += `<div class="gh-month-label" style="width:${(wi - (labHtml === '' ? 0 : 0)) * 16}px;min-width:0">${monthPositions[wi]}</div>`;
-        lastLabelWi = wi;
-      } else if (!monthPositions[wi]) {
-        // spacer handled by flex gap
+        if(dI===tISO)cell.classList.add('today');
+        if(dI>tISO)cell.classList.add('future');
+        else{cell.onclick=()=>openModal(dI)}
+        const n=DATA.logs[dI]&&DATA.logs[dI].length?' · '+s+' sessions':'';
+        cell.title=fmt(dI)+n;
       }
-    });
-    // simpler approach — fixed width per week column
-    labelsEl.innerHTML = '';
-    weeks.forEach((week, wi) => {
-      const lbl = monthPositions[wi] || '';
-      const div = document.createElement('div');
-      div.className = 'gh-month-label';
-      div.style.width = '16px';
-      div.style.minWidth = '16px';
-      div.textContent = lbl;
-      labelsEl.appendChild(div);
-    });
-
-    // Render columns
-    const colsEl = document.getElementById('gh-cols');
-    colsEl.innerHTML = '';
-    weeks.forEach(week => {
-      const col = document.createElement('div');
-      col.className = 'gh-col';
-      week.forEach(day => {
-        const cell = document.createElement('div');
-        const inYear = day.getFullYear() === year;
-        if (!inYear) {
-          cell.className = 'gh-cell empty';
-        } else {
-          const k = dayKey(day.getFullYear(), day.getMonth()+1, day.getDate());
-          const isFuture = day > today;
-          const isToday = day.getTime() === today.getTime();
-          const isDone = !!doneDays[k];
-          let cls = 'gh-cell';
-          if (isFuture) cls += ' future';
-          else if (isDone) cls += ' done';
-          if (isToday) cls += ' today';
-          cell.className = cls;
-          const dateStr = `${day.getDate()} ${MONTH_NAMES[day.getMonth()]}`;
-          cell.setAttribute('data-tip', isDone ? `✓ ${dateStr}` : dateStr);
-          if (!isFuture) cell.onclick = () => toggleDay(k);
-        }
-        col.appendChild(cell);
-      });
-      colsEl.appendChild(col);
-    });
-  }
-
-  function updateStats() {
-    const allDone = Object.keys(doneDays).filter(k => doneDays[k]).sort();
-    const total = allDone.length;
-    const t = todayObj();
-
-    // current streak — count backwards from today
-    let streak = 0;
-    let check = new Date(t.y, t.m, t.d);
-    for (let i = 0; i < 500; i++) {
-      const k = dayKey(check.getFullYear(), check.getMonth()+1, check.getDate());
-      if (doneDays[k]) { streak++; check.setDate(check.getDate()-1); }
-      else break;
+      col.appendChild(cell);
+      d.setDate(d.getDate()+1);
     }
-
-    // longest streak
-    let longest = 0, cur = 0, prev = null;
-    for (const k of allDone) {
-      const [y,m,d] = k.split('-').map(Number);
-      const dt = new Date(y, m-1, d);
-      if (prev) {
-        const diff = Math.round((dt - prev) / 86400000);
-        cur = diff === 1 ? cur + 1 : 1;
-      } else cur = 1;
-      if (cur > longest) longest = cur;
-      prev = dt;
-    }
-
-    // this month %
-    const daysPassedThisMonth = t.d;
-    const doneThisMonth = allDone.filter(k => {
-      const [y,m] = k.split('-').map(Number);
-      return y === t.y && m === t.m+1;
-    }).length;
-    const pct = daysPassedThisMonth > 0 ? Math.round((doneThisMonth / daysPassedThisMonth) * 100) : 0;
-
-    document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-streak').textContent = streak;
-    document.getElementById('stat-longest').textContent = longest;
-    document.getElementById('stat-pct').textContent = pct + '%';
-    document.getElementById('streak-big').textContent = streak;
-
-    const msgs = ['Start today — tick the first box.', 'One day down. Keep going.', 'Two days. Don\'t stop.', 'Three days straight. Real progress.', 'Four days. Habit forming.', 'Five days. Almost a week.', 'Six days. Don\'t break it.', 'One full week. Serious.', 'Two weeks. You\'re locked in.', 'One month streak. Legendary.'];
-    const idx = Math.min(streak, msgs.length - 1);
-    document.getElementById('streak-msg').textContent = msgs[idx];
+    weeksBox.appendChild(col);wk++;
   }
+  const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let last=0;
+  monthPos.forEach(p=>{
+    const sp=document.createElement('span');
+    sp.style.width=((p.wk-last)*15)+'px';
+    monthsBox.appendChild(sp);
+    const lbl=document.createElement('span');lbl.textContent=MN[p.m];lbl.style.width='15px';
+    monthsBox.appendChild(lbl);
+    last=p.wk+1;
+  });
+  const leg=document.getElementById('legend');leg.innerHTML='';
+  ROADMAP.forEach(t=>{
+    const s=document.createElement('span');
+    s.innerHTML='<i style="background:'+t.color+'"></i>'+t.name;
+    leg.appendChild(s);
+  });
+}
 
-  function updatePhaseProgress() {
-    PHASES.forEach(p => {
-      let total = 0, done = 0;
-      for (let d = new Date(p.start); d <= p.end; d.setDate(d.getDate()+1)) {
-        total++;
-        const k = dayKey(d.getFullYear(), d.getMonth()+1, d.getDate());
-        if (doneDays[k]) done++;
-      }
-      const pct = total > 0 ? Math.round((done/total)*100) : 0;
-      const bar = document.getElementById(`p${p.id}-bar`);
-      const pctEl = document.getElementById(`p${p.id}-pct`);
-      if (bar) bar.style.width = pct + '%';
-      if (pctEl) pctEl.textContent = pct + '%';
-    });
-  }
+function openModal(dISO){
+  modalDate=dISO;
+  document.getElementById('m-date').textContent=fmt(dISO);
+  const sel=document.getElementById('f-topic');
+  if(!sel.options.length)ROADMAP.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.name;sel.appendChild(o)});
+  renderEntries();
+  document.getElementById('f-sess').value=1;
+  document.getElementById('f-lc').value=0;
+  document.getElementById('f-cf').value=0;
+  document.getElementById('f-note').value='';
+  document.getElementById('overlay').classList.add('open');
+}
+function renderEntries(){
+  const box=document.getElementById('m-entries');box.innerHTML='';
+  const arr=DATA.logs[modalDate]||[];
+  arr.forEach((e,i)=>{
+    const t=TOPIC[e.t];
+    const row=document.createElement('div');row.className='entry';
+    const extra=[(e.lc?e.lc+' LC':''),(e.cf?e.cf+' CF':''),(e.note||'')].filter(Boolean).join(' · ');
+    row.innerHTML='<span><span class="dot" style="background:'+t.color+'"></span>'+t.name+' × '+e.s+'<span class="meta">'+(extra?' — '+extra:'')+'</span></span>';
+    const del=document.createElement('button');del.className='del';del.textContent='✕';
+    del.onclick=async()=>{arr.splice(i,1);if(!arr.length)delete DATA.logs[modalDate];await saveData();renderEntries();render()};
+    row.appendChild(del);
+    box.appendChild(row);
+  });
+  if(!arr.length)box.innerHTML='<div style="color:var(--faint);font-size:12px;padding:4px 0 10px">Nothing logged yet — add your first entry below.</div>';
+}
+async function saveEntry(){
+  const e={
+    t:document.getElementById('f-topic').value,
+    s:parseInt(document.getElementById('f-sess').value)||0,
+    lc:parseInt(document.getElementById('f-lc').value)||0,
+    cf:parseInt(document.getElementById('f-cf').value)||0,
+    note:document.getElementById('f-note').value.trim()
+  };
+  if(e.s===0&&e.lc===0&&e.cf===0)return;
+  if(!DATA.logs[modalDate])DATA.logs[modalDate]=[];
+  DATA.logs[modalDate].push(e);
+  await saveData();
+  renderEntries();render();toast('Logged ✓');
+}
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1600);
+}
 
-  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+document.getElementById('btn-today').onclick=()=>openModal(todayISO());
+document.getElementById('btn-save').onclick=saveEntry;
+document.getElementById('btn-close').onclick=()=>document.getElementById('overlay').classList.remove('open');
+document.getElementById('overlay').onclick=e=>{if(e.target.id==='overlay')e.target.classList.remove('open')};
+document.getElementById('btn-export').onclick=()=>{
+  const blob=new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='faang-tracker-backup-'+todayISO()+'.json';a.click();
+};
+document.getElementById('imp').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=async()=>{
+    try{const d=JSON.parse(r.result);
+      if(d&&d.logs&&d.baseline){DATA=d;await saveData();render();toast('Imported ✓')}
+      else toast('Invalid file');
+    }catch(err){toast('Invalid file')}
+  };
+  r.readAsText(f);
+};
+document.getElementById('btn-reset').onclick=async()=>{
+  if(!confirm('Reset ALL progress? This cannot be undone. Export a backup first.'))return;
+  DATA=JSON.parse(JSON.stringify(DEFAULT));
+  await saveData();render();toast('Reset done');
+};
 
-  function switchTab(name) {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelector(`[onclick="switchTab('${name}')"]`).classList.add('active');
-    document.getElementById('tab-' + name).classList.add('active');
-    if (name === 'tracker') { renderYearGrid(viewYear); updateStats(); }
-  }
-
-  function switchInner(btn, contentId) {
-    const pc = btn.closest('.phase-content');
-    pc.querySelectorAll('.inner-tab').forEach(t => t.classList.remove('active'));
-    pc.querySelectorAll('.inner-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(contentId).classList.add('active');
-  }
-
-  // INIT
-  updateStats();
-  updatePhaseProgress();
+(async()=>{
+  DATA=await loadData();
+  renderYearBtns();
+  render();
+})();
 </script>
 </body>
 </html>
